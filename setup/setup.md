@@ -11,4 +11,6 @@ $chmod +x setup.sh
 # docker-comopseのキャッシュ削除
 ```
 docker builder prune -a
+docker system prune -a
+docker volume rm $(docker volume ls -qf dangling=true)
 ```

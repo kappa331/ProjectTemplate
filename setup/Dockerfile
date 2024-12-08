@@ -1,9 +1,8 @@
-ARG RUBY_VERSION=RUBY_VERSION
-ARG RAILS_APP_NAME=app
+ARG RUBY_VERSION
 
 FROM ruby:${RUBY_VERSION}
 
-ENV RAILS_APP_NAME=${RAILS_APP_NAME}
+ARG RAILS_APP_NAME
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 RUN mkdir /${RAILS_APP_NAME}
