@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: postgres
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+      args:
+        RUBY_VERSION: ${RUBY_VERSION}
+        RAILS_APP_NAME: ${RAILS_APP_NAME}
+    command: bundle exec rails s -p ${RAILS_PORT} -b '0.0.0.0'
+    volumes:
+      - .:/${RAILS_APP_NAME}
+    ports:
+      - "${RAILS_PORT}:${RAILS_PORT}"
+    depends_on:
+      - db
