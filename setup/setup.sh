@@ -41,31 +41,31 @@ cp Dockerfile "../$PROJECT_NAME/docker/rails/Dockerfile"
 cp docker-compose.yml "../$PROJECT_NAME/docker-compose.yml"
 
 # Gemfileを生成する
-envsubst < Gemfile > "../$PROJECT_NAME/docker/rails/Gemfile"
+envsubst < Gemfile > "../$PROJECT_NAME/$RAILS_APP_NAME/Gemfile"
 
 # Gemfile.lockをコピーする
-cp Gemfile.lock "../$PROJECT_NAME/docker/rails/Gemfile.lock"
+cp Gemfile.lock "../$PROJECT_NAME/$RAILS_APP_NAME/Gemfile.lock"
 
 # 現在位置の移動
 cd ../$PROJECT_NAME
 
 # Railsアプリの雛形を生成する
-docker-compose run web rails new "./$RAILS_APP_NAME" --force --database=postgresql
+docker-compose run web rails new . --force --database=postgresql
 
-# # 新たなGemfileが作成されたので、イメージを再ビルドする
-# docker-compose build
+# 新たなGemfileが作成されたので、イメージを再ビルドする
+docker-compose build
 
-# # 現在位置の移動
-# cd ../setup
+# 現在位置の移動
+cd ../setup
 
-# # database.ymlを置換する
-# cp database.yml "../$PROJECT_NAME/$RAILS_APP_NAME/config/database.yml"
+# database.ymlを置換する
+cp database.yml "../$PROJECT_NAME/$RAILS_APP_NAME/config/database.yml"
 
-# # 現在位置の移動
-# cd ../$PROJECT_NAME
+# 現在位置の移動
+cd ../$PROJECT_NAME
 
-# # railsを起動する
-# docker-compose up -d
+# railsを起動する
+docker-compose up -d
 
-# # データベースを生成する
-# docker-compose run web rake db:create
+# データベースを生成する
+docker-compose run web rake db:create

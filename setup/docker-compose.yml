@@ -17,7 +17,7 @@ services:
       DATABASE_NAME: ${DATABASE_NAME}
     command: bundle exec rails s -p ${RAILS_PORT} -b '0.0.0.0'
     volumes:
-      - .:/${RAILS_APP_NAME}
+      - ./${RAILS_APP_NAME}:/${RAILS_APP_NAME}
     ports:
       - "${RAILS_PORT}:${RAILS_PORT}"
     depends_on:
