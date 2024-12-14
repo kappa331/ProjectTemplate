@@ -10,4 +10,4 @@ WORKDIR /${RAILS_APP_NAME}
 ADD docker/rails/Gemfile /${RAILS_APP_NAME}/Gemfile
 ADD docker/rails/Gemfile.lock /${RAILS_APP_NAME}/Gemfile.lock
 RUN bundle install
-ADD . /${RAILS_APP_NAME}
+ADD ${RAILS_APP_NAME} /${RAILS_APP_NAME}

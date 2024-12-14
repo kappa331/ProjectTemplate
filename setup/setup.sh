@@ -28,6 +28,9 @@ mkdir_with_confirm "../$PROJECT_NAME/docker/rails"
 # postgresqlフォルダを作成する
 mkdir_with_confirm "../$PROJECT_NAME/docker/postgresql"
 
+# railsアプリフォルダを作成する
+mkdir_with_confirm "../$PROJECT_NAME/$RAILS_APP_NAME"
+
 # .envを生成する
 envsubst < .env > "../$PROJECT_NAME/.env"
 
@@ -49,17 +52,17 @@ cd ../$PROJECT_NAME
 # Railsアプリの雛形を生成する
 docker-compose run web rails new "./$RAILS_APP_NAME" --force --database=postgresql
 
-# 新たなGemfileが作成されたので、イメージを再ビルドする
-docker-compose build
+# # 新たなGemfileが作成されたので、イメージを再ビルドする
+# docker-compose build
 
-# 現在位置の移動
-cd ../setup
+# # 現在位置の移動
+# cd ../setup
 
-# database.ymlを置換する
-cp database.yml "../$PROJECT_NAME/$RAILS_APP_NAME/config/database.yml"
+# # database.ymlを置換する
+# cp database.yml "../$PROJECT_NAME/$RAILS_APP_NAME/config/database.yml"
 
-# 現在位置の移動
-cd ../$PROJECT_NAME
+# # 現在位置の移動
+# cd ../$PROJECT_NAME
 
 # # railsを起動する
 # docker-compose up -d
