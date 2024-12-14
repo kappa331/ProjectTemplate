@@ -46,14 +46,23 @@ cp Gemfile.lock "../$PROJECT_NAME/docker/rails/Gemfile.lock"
 # 現在位置の移動
 cd ../$PROJECT_NAME
 
-# # Railsアプリの雛形を生成する
+# Railsアプリの雛形を生成する
 docker-compose run web rails new "./$RAILS_APP_NAME" --force --database=postgresql
 
-# # 新たなGemfileが作成されたので、イメージを再ビルドする
+# 新たなGemfileが作成されたので、イメージを再ビルドする
 docker-compose build
 
-# # docker/rails/database_template.ymlからdatabase.ymlを生成する
-# envsubst < docker/rails/database_template.yml > database.yml
+# 現在位置の移動
+cd ../setup
 
-# # 変数を初期化する
-# unset $RAILS_APP_NAME
+# database.ymlを置換する
+cp database.yml "../$PROJECT_NAME/$RAILS_APP_NAME/config/database.yml"
+
+# 現在位置の移動
+cd ../$PROJECT_NAME
+
+# # railsを起動する
+# docker-compose up -d
+
+# # データベースを生成する
+# docker-compose run web rake db:create
