@@ -12,7 +12,6 @@ services:
         RUBY_VERSION: ${RUBY_VERSION}
         RAILS_APP_NAME: ${RAILS_APP_NAME}
     environment:
-      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       DATABASE_NAME: ${DATABASE_NAME}
     command: bundle exec rails s -p ${RAILS_PORT} -b '0.0.0.0'
